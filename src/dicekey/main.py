@@ -18,6 +18,7 @@
 # Built-in
 import sys
 import tkinter as tk
+from pathlib import Path
 
 # Local
 from dicekey import diceware
@@ -40,9 +41,11 @@ class App:
 
 
 def main():
+    # There is probably a better way to package the data separately. Maybe this is fine and just we generate a ~/.dicekey dir.
+    data_root = Path(__file__).parent / 'data'
 
     pwgen = diceware.Gen()
-    wordlist = pwgen.loadlist("dicekey/wordlist.asc")
+    wordlist = pwgen.loadlist(data_root / "wordlist.asc")
 
     if len(sys.argv) > 1:
         if wordlist:
